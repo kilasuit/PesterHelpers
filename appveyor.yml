@@ -1,7 +1,24 @@
 # Custom Appveyor settings
-
-image: Visual Studio 2017
-
+environment:
+  matrix:
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    PowerShellEdition: Desktop
+    Test: Full
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    PowerShellEdition: Core
+    Test: Full
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    PowerShellEdition: Desktop
+    Test: Norm
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    PowerShellEdition: Core
+    Test: Norm
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    PowerShellEdition: Desktop
+    Test: Min
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    PowerShellEdition: Core
+    Test: Min
 matrix:
   # immediately finish build on failure
   fast_finish: true
@@ -12,6 +29,7 @@ install:
 build_script:
   - ps: |
       $ErrorActionPreference = 'Stop'
-      Invoke-Build .\build.min.ps1
+      $buildScript = "build.($test).ps1"
+      Invoke-Build $buildScript
       Compress-Archive -Path ".\bin\$Env:APPVEYOR_PROJECT_NAME" -DestinationPath ".\$Env:APPVEYOR_PROJECT_NAME.zip"
       Push-AppveyorArtifact ".\$Env:APPVEYOR_PROJECT_NAME.zip"
