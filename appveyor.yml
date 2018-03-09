@@ -4,21 +4,27 @@ environment:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Desktop
     Test: Full
+    StandardName: PesterHelpers
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Core
     Test: Full
+    StandardName: PesterHelpers
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Desktop
     Test: Norm
+    StandardName: PesterHelpers
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Core
     Test: Norm
+    StandardName: PesterHelpers
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Desktop
     Test: Min
+    StandardName: PesterHelpers
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Core
     Test: Min
+    StandardName: PesterHelpers
 matrix:
   # immediately finish build on failure
   fast_finish: true
@@ -29,7 +35,7 @@ install:
 build_script:
   - ps: |
       $ErrorActionPreference = 'Stop'
-      $buildScript = ".\build.$($env:test).ps1"
+      $buildScript = ".\build.$($test).ps1"
       Invoke-Build -File $buildScript
       Compress-Archive -Path ".\bin\$Env:APPVEYOR_PROJECT_NAME" -DestinationPath ".\$Env:APPVEYOR_PROJECT_NAME.zip"
       Push-AppveyorArtifact ".\$Env:APPVEYOR_PROJECT_NAME.zip"
