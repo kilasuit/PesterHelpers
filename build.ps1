@@ -3,7 +3,7 @@
 #Requires -Modules @{ModuleName='Pester';ModuleVersion='4.1.1'}
 
 $Script:IsAppveyor = $env:APPVEYOR -ne $null
-$Script:ModuleName = Get-Item -Path $BuildRoot | Select-Object -ExpandProperty Name
+$Script:ModuleName = 'PesterHelpers'
 Get-Module -Name $ModuleName,'helpers' | Remove-Module -Force
 Import-Module "$BuildRoot\buildhelpers\helpers.psm1"
 #$tests = Get-ChildItem .\Pr*\*,.\Pu*\* -Recurse | Where-Object Name -Match Tests.ps1    
@@ -28,7 +28,7 @@ task Clean {
 
 task TestCode {
     Write-Build Yellow "`n`n`nTesting dev code before build"
-    $TestResult = Invoke-Pester -Script $BuildRoot\$($env:standardname).$($env:Test).tests.ps1 -PassThru
+    $TestResult = Invoke-Pester -Script $BuildRoot\$($ModuleName).$($env:Test).tests.ps1 -PassThru
     if($TestResult.FailedCount -gt 0) {throw 'Tests failed'}
 }
 
