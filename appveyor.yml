@@ -32,5 +32,5 @@ build_script:
       $ErrorActionPreference = 'Stop'
       $buildScript = ".\build.ps1"
       Invoke-Build -File $buildScript
-      Compress-Archive -Path ".\bin\PesterHelpers" -DestinationPath ".\PesterHelpers.zip"
-      Push-AppveyorArtifact ".\PesterHelpers.zip"
+      #Compress-Archive -Path ".\bin\PesterHelpers\" -DestinationPath ".\PesterHelpers.zip"
+      #Push-AppveyorArtifact ".\PesterHelpers.zip"
