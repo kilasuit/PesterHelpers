@@ -4,7 +4,7 @@ environment:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Desktop
     Test: Full
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Core
     Test: Full
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -19,6 +19,7 @@ environment:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     PowerShellEdition: Core
     Test: Min
+
 matrix:
   # immediately finish build on failure
   fast_finish: true
