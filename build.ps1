@@ -28,7 +28,7 @@ task Clean {
 
 task TestCode {
     Write-Build Yellow "`n`n`nTesting dev code before build"
-    $TestResult = Invoke-Pester -Script $BuildRoot\$($env:standardname).full.tests.ps1 -PassThru
+    $TestResult = Invoke-Pester -Script $BuildRoot\$($env:standardname).$($env:Test).tests.ps1 -PassThru
     if($TestResult.FailedCount -gt 0) {throw 'Tests failed'}
 }
 
